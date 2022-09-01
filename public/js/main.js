@@ -40,8 +40,7 @@ async function getAllCars() {
 }
 
 async function getAllManufacturers() {
-  const response = await fetch(
-    `http://localhost:3000/products/manufacturers`);
+  const response = await fetch(`http://localhost:3000/products/manufacturers`);
   const data = await response.json();
   const elemManufacturers = document.getElementById('select-manufacturers');
   if (!data.error)
