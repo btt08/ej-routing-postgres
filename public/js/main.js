@@ -57,7 +57,6 @@ function printCars(data) {
   else {
     for (let i = 0; i < data.result.length; i++) {
       const car = data.result[i];
-      console.table(car)
       const newDiv = document.createElement('div');
       newDiv.classList.add('car');
       for (const property in car) {
