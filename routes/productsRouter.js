@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const products = require('../services/productsService');
 const getAllManufacturers = require('../services/manufacturersService');
+const client = require('../modules/postgresDB');
 
 router.get('/all', async (req, res, next) => {
   try {
@@ -14,7 +15,6 @@ router.get('/all', async (req, res, next) => {
 router.post('/search', async (req, res, next) => {
   try {
     const result = await products.filterProducts(req?.body?.brand, req?.body?.color, req?.body?.price, req?.body?.manufacturer);
-
     checkResultLength(result.rows, res);
   } catch (error) {
     next(error)
@@ -29,6 +29,14 @@ router.get('/manufacturers', async (req, res, next) => {
     next(err);
   }
 });
+
+router.get('/delete/:id', async (req, res, next) => {
+  try {
+    const result = await products.deleteCar(req.params.id);
+  } catch (error) {
+    console.error(error);
+  }
+})
 
 function checkResultLength(result, res) {
   result.length > 0

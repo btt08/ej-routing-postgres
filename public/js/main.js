@@ -59,6 +59,7 @@ function printCars(data) {
       const car = data.result[i];
       const newDiv = document.createElement('div');
       newDiv.classList.add('car');
+      newDiv.setAttribute('data-id', car.id);
       for (const property in car) {
         if (property !== 'id') {
           const newP = document.createElement('p');
@@ -66,7 +67,21 @@ function printCars(data) {
           newDiv.append(newP);
         }
       }
+      const elemBtn = document.createElement('button');
+      elemBtn.classList.add('btn');
+      elemBtn.textContent = 'Delete';
+      elemBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        deleteCar(car.id);
+        getSearchCars();
+      });
+      newDiv.appendChild(elemBtn);
       elemContent.appendChild(newDiv);
     }
   }
+}
+
+async function deleteCar(id) {
+  alert(`Coche con is ${id}} borrado`);
+  const response = await fetch(`http://localhost:3000/products/delete/${id}`);
 }
