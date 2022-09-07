@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const products = require('../services/productsService');
 const getAllManufacturers = require('../services/manufacturersService');
-const client = require('../modules/postgresDB');
 
 router.get('/all', async (req, res, next) => {
   try {
